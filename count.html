@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown to July 1st</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="countdown-card">
+      <h1>Countdown to July 1st</h1>
+      <div class="countdown" id="countdown">
+        <span><strong id="days">00</strong> Days</span>
+        <span><strong id="hours">00</strong> Hours</span>
+        <span><strong id="minutes">00</strong> Minutes</span>
+        <span><strong id="seconds">00</strong> Seconds</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const countdown = () => {
+      const countDate = new Date("July 1, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const gap = countDate - now;
+
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
+
+      const d = Math.floor(gap / day);
+      const h = Math.floor((gap % day) / hour);
+      const m = Math.floor((gap % hour) / minute);
+      const s = Math.floor((gap % minute) / second);
+
+      document.getElementById("days").innerText = d;
+      document.getElementById("hours").innerText = h;
+      document.getElementById("minutes").innerText = m;
+      document.getElementById("seconds").innerText = s;
+    };
+
+    setInterval(countdown, 1000);
+  </script>
+</body>
+</html>
