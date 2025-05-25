@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Countdown to 1st July</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 50px;
-      background-color: #f5f5f5;
-    }
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-    }
-    .countdown {
-      font-size: 2em;
-      color: #333;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown to July 1st</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <h1>Countdown to 1st July</h1>
-  <div class="countdown" id="countdown">Loading...</div>
+  <div class="container">
+    <div class="countdown-card">
+      <h1>Countdown to July 1st</h1>
+      <div class="countdown" id="countdown">
+        <span><strong id="days">00</strong> Days</span>
+        <span><strong id="hours">00</strong> Hours</span>
+        <span><strong id="minutes">00</strong> Minutes</span>
+        <span><strong id="seconds">00</strong> Seconds</span>
+      </div>
+    </div>
+  </div>
 
   <script>
-    function updateCountdown() {
-      const targetDate = new Date('July 1, 2025 00:00:00').getTime();
+    const countdown = () => {
+      const countDate = new Date("July 1, 2025 00:00:00").getTime();
       const now = new Date().getTime();
-      const distance = targetDate - now;
+      const gap = countDate - now;
 
-      if (distance < 0) {
-        document.getElementById("countdown").innerHTML = "It's 1st July!";
-        return;
-      }
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const d = Math.floor(gap / day);
+      const h = Math.floor((gap % day) / hour);
+      const m = Math.floor((gap % hour) / minute);
+      const s = Math.floor((gap % minute) / second);
 
-      document.getElementById("countdown").innerHTML =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
+      document.getElementById("days").innerText = d;
+      document.getElementById("hours").innerText = h;
+      document.getElementById("minutes").innerText = m;
+      document.getElementById("seconds").innerText = s;
+    };
 
-    updateCountdown(); // initial call
-    setInterval(updateCountdown, 1000); // update every second
+    setInterval(countdown, 1000);
   </script>
-
 </body>
 </html>
